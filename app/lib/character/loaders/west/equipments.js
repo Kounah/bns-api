@@ -24,7 +24,7 @@ function grabData(content) {
     return undefined;
   }
 
-  let result = {accessory: {}};
+  let result = {accessory: {}, soulshield: {}};
 
   if(!(d.querySelector('#equipItems > div.wrapItem > div.wrapWeapon > div.icon > span') instanceof dom.window.Element)) {
     result.weapon = {
@@ -76,6 +76,24 @@ function grabData(content) {
       result.accessory[key] = item;
     }
   });
+
+  Array.prototype.slice.call(d.querySelectorAll('#equipItems > div.wrapGem > div > span'))
+    .forEach((elem, i) => {
+      if(typeof elem == 'object' && elem instanceof dom.window.Element) {
+        let img = elem.querySelector('img');
+        let area = d.querySelector('#equipItems > div.wrapGem > div > map > area:nth-child(' + (i + 1) + ')');
+        if(typeof img == 'object' && img instanceof dom.window.Element
+        && typeof area == 'object' && area instanceof dom.window.Element) {
+          result.soulshield[elem.classList[0]] = {
+            name: area.getAttribute('alt'),
+            icon: img.getAttribute('src'),
+            data: area.getAttribute('item-data').split('.').map(_ => Number(_))
+          };
+        } else {
+          result[elem.classList[0]] = 'empty';
+        }
+      }
+    });
 
   return result;
 }

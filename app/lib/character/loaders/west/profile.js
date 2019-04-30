@@ -47,6 +47,12 @@ function grabData(content) {
       cb: function(elem) {
         return elem.getAttribute('src');
       }
+    },
+    classIcon: {
+      selector: '#header > dl > dd.thumb > div > img',
+      cb: function(elem) {
+        return elem.getAttribute('src');
+      }
     }
   };
 
