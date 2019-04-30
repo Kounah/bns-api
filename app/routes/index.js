@@ -25,6 +25,8 @@ function router(app) {
   app.get('/p', (req, res) => {
     res.status(200).json(getPackage());
   });
+
+  require('./character').router(app);
 }
 
 module.exports = {

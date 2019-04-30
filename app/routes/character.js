@@ -7,8 +7,15 @@ const error = require('../lib/error');
  */
 function router(app) {
   app.get('/character/:region/:name', error.handler, async (req, res) => {
-    res.status(200).json(await character.load(req.params.region, req.params.name));
+    try {
+      let data = await character(req.params.region, req.params.name);
+      res.status(200).json(data);
+    } catch(err) {
+      error.handler(req, res, function() { throw err; });
+    }
   });
 }
 
-module.exports = router();
+module.exports = {
+  router
+};

@@ -11,7 +11,11 @@ async function load(region, name) {
     /**@type {config.Region} */
     let handler = config[region];
     if(typeof handler == 'object') {
-      return await handler.loader(region, name, handler.baseUrl);
+      try {
+        return await handler.loader(handler.baseUrl, name);
+      } catch(err) {
+        throw err;
+      }
     } else throw new error.InvalidRegionError(region);
   } else throw new TypeError('"config" is not an Object.');
 }

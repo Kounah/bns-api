@@ -1,31 +1,34 @@
-const async = require('async');
-
 const profile = require('./profile');
-const gear = require('./gear');
-const stat = require('./stat');
+const equipments = require('./equipments');
+const stats = require('./stats');
 const skills = require('./skills');
 const traits = require('./traits');
+
+let parts = {
+  profile,
+  equipments,
+  stats,
+  skills,
+  traits
+};
 
 /**
  * loads the character
  * @param {String} baseUrl the base url of this regions server
- * @param {*} name the name of the character
+ * @param {String} name the name of the character
  */
-function load(baseUrl, name) {
-  async.parallel([
-    profile(baseUrl, name),
-    gear(baseUrl, name),
-    stat(baseUrl, name),
-    skills(baseUrl, name),
-    traits(baseUrl, name)
-  ], (res, err) => {
-    if(err) {
-      console.error(err);
-      return;
-    }
-
-    console.log(res);
-  });
+async function load(baseUrl, name) {
+  try {
+    let arr = await Promise.all(Object.keys(parts).map(key => parts[key](baseUrl, name)));
+    let keys = Object.keys(parts);
+    let result = {};
+    arr.forEach((v, i) => {
+      result[keys[i]] = v;
+    });
+    return result;
+  } catch(err) {
+    throw err;
+  }
 }
 
 module.exports = load;

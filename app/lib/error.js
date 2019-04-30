@@ -52,11 +52,13 @@ class RequestError extends Error {
    */
   constructor(message, properties) {
     super(message);
+    this.msg = this.message;
 
     /** @type {Number} */
     this.statusCode;
     /** @type {RequestGist} */
     this.request;
+
 
     propdef(this, [{
       name: 'statusCode',
@@ -69,6 +71,26 @@ class RequestError extends Error {
       required: false,
       cast: RequestGist
     }], properties);
+  }
+}
+
+/**
+ * @typedef {Object} UnknownErrorProperties
+ * @property {Object} request
+ */
+class UnknownError extends RequestError {
+  /**
+   * creates a new missing-parameter error
+   * @param {String} object the name of the parameter
+   * @param {UnknownErrorProperties} properties additional properties
+   */
+  constructor(object, properties) {
+    super(`An unknown object was thrown as Error. ${object.constructor.name}`, {
+      statusCode: 500,
+      request: typeof properties == 'object' ? properties.request : null
+    });
+
+    this.object = object;
   }
 }
 
@@ -152,17 +174,20 @@ class InternalError extends RequestError {
  */
 function handler(req, res, next) {
   try {
-    next();
+    if(typeof next == 'function') {
+      next();
+    }
   } catch(err) {
     if(typeof err == 'object' && err instanceof Error) {
       if(err instanceof RequestError) {
         res.status(err.statusCode).json(err);
       } else {
-        var _err = new InternalError(err, {
-          request: req
-        });
+        var _err = new InternalError(err);
         res.status(_err.statusCode).json(_err);
       }
+    } else {
+      let _err = new UnknownError(err);
+      res.status(_err.statusCode).json(_err);
     }
   }
 }
@@ -173,5 +198,6 @@ module.exports = {
   RequestError,
   InternalError,
   MissingParameterError,
-  NotFoundError
+  NotFoundError,
+  UnknownError
 };
