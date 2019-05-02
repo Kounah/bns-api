@@ -1,0 +1,159 @@
+- name: Attack Power
+  columns:
+  - name: Normal
+    key:  attack_power_value
+    use:  total
+  - name: Boss
+    key:  boss_attack_power_value
+    use:  total
+  - name: PvP
+    key:  pc_attack_power_value
+    use:  total
+- name: Piercing
+  columns:
+  - name:   Stat
+    key:    attack_pierce_value
+    use:    total
+  - name:   Defense Rate
+    key:    attack_defend_pierce_rate
+    use:    total
+    suffix: "%"
+  - name:   Parry Rate
+    key:    attack_parry_pierce_rate
+    use:    total
+    suffix: "%"
+- name: Accuracy
+  columns:
+  - name:   Stat
+    key:    attack_hit_value
+    use:    total
+  - name:   Hit Rate
+    key:    attack_hit_rate
+    use:    total
+    suffix: "%"
+- name: Critical Hit
+  columns:
+  - name:   Stat
+    key:    attack_critical_value
+    use:    total
+  - name:   Crit Rate
+    key:    attack_critical_rate
+    use:    total
+    suffix: "%"
+- name: Critical Damage
+  columns:
+  - name:   Stat
+    key:    attack_critical_damage_value
+    use:    total
+  - name:   Damage Modifier
+    key:    attack_critical_damage_rate
+    use:    total
+    suffix: "%"
+- name: Mythic
+  columns:
+  - name:   Stat
+    key:    attack_attribute_value
+    use:    total
+  - name:   Damage Rate
+    key:    attack_attribute_rate
+    use:    total
+    suffix: "%"
+- name: Debuff Damage
+  columns:
+  - name:   Stat
+    key:    abnormal_attack_power_value
+    use:    total
+  - name:   Damage Modifier
+    key:    abnormal_attack_power_rate
+    use:    total
+    suffix: "%"
+- name: Additional Damage
+  key:  attack_damage_modify_diff
+  use:  total
+- name:   Threat
+  key:    hate_power_rate
+  use:    total
+  suffix: "%"
+- name: HP
+  columns:
+  - name: Hit Points
+    key:  max_hp
+    use:  total
+  - name: Resilience
+    key:  guard_gauge
+    use:  total
+- name: Defense
+  columns:
+  - name:   Stat
+    key:    defend_power_value
+    use:    total
+  - name:   Damage Reduction
+    key:    defend_physical_damage_reduce_rate
+    use:    total
+    suffix: "%"
+- name: Boss Defense
+  columns:
+  - name:   Stat
+    key:    boss_defend_power_value
+    use:    total
+  - name:   Damage Reduction
+    key:    boss_defend_power_rate
+    use:    total
+    suffix: "%"
+- name: PvP Defense
+  columns:
+  - name:   Stat
+    key:    pc_defend_power_value
+    use:    total
+  - name:   Damage Reduction
+    key:    pc_defend_power_rate
+    use:    total
+    suffix: "%"
+- name: Evasion
+  columns:
+  - name:   Stat
+    key:    defend_dodge_value
+    use:    total
+  - name:   Rate
+    key:    defend_dodge_rate
+    use:    total
+    suffix: "%"
+- name: Block
+  columns:
+  - name:   Stat
+    key:    defend_parry_value
+    use:    total
+  - name:   Damage Reduction
+    key:    defend_parry_reduce_rate
+    use:    total
+    suffix: "%"
+  - name:   Improve Block
+    key:    perfect_parry_damage_reduce_rate
+    use:    total
+    suffix: "%"
+  - name:   Rate
+    key:    defend_parry_rate
+    use:    total
+    suffix: "%"
+- name: Critical Defense
+  columns:
+  - name:   Stat
+    key:    defend_critical_value
+    use:    total
+  - name:   Reduce Crit
+    key:    defend_critical_rate
+    use:    total
+    suffix: "%"
+  - name:   Reduce Crit Damage
+    key:    defend_critical_damage_rate
+    use:    total
+    suffix: "%"
+- name: Debuff Defense
+  columns:
+  - name:   Stat
+    key:    abnormal_defend_power_value
+    use:    total
+  - name:   Reduce Damage
+    key:    abnormal_defend_power_rate
+    use:    total
+    suffix: "%"

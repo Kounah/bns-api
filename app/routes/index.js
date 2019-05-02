@@ -27,6 +27,7 @@ function router(app) {
   });
 
   require('./character').router(app);
+  require('./statmap').router(app);
 }
 
 module.exports = {
